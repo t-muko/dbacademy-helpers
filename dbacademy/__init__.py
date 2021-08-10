@@ -1,19 +1,23 @@
 # Databricks notebook source
+
+def dbacademy_get_tags() -> dict:
+  return sc._jvm.scala.collection.JavaConversions.mapAsJavaMap(
+      dbutils.entry_point.getDbutils().notebook().getContext().tags())
+
+def dbacademy_use_database(name):
+  spark.sql(f"CREATE DATABASE IF NOT EXISTS {name}")
+  spark.sql(f"USE {DBAcademyConfig.user_db}")
+  print(f"""The current database is now {DBAcademyConfig.user_db}""")
+
+def dbacademy_notebook_path():
+  return dbutils.entry_point.getDbutils().notebook().getContext().notebookPath().getOrElse(None)
+  
 class _DBAcademyConfig:
   import re
   
   def __init__(self):
-    from pyspark import SparkContext
-    from pyspark.sql import SparkSession
-    from pyspark.dbutils import DBUtils
-
-    global spark, sc
     self._use_db = False
     self._course_name = None
-
-    self.spark = SparkSession.builder.getOrCreate()
-    self.sc = self.spark.sparkContext
-    self.dbutils = DBUtils(self.spark)
     
   @staticmethod
   def configure(course_name, use_db):
@@ -22,23 +26,8 @@ class _DBAcademyConfig:
     DBAcademyConfig._use_db = use_db
     DBAcademyConfig._course_name = course_name
     
-    if use_db:
-      spark.sql(f"CREATE DATABASE IF NOT EXISTS {DBAcademyConfig.user_db}")
-      spark.sql(f"USE {DBAcademyConfig.user_db}")
-      print(f"""The current database is now {DBAcademyConfig.user_db}""")
+    if use_db: dbacademy_use_database(DBAcademyConfig.user_db)
   
-  def _get_tags(self) -> dict:
-    return self.sc._jvm.scala.collection.JavaConversions.mapAsJavaMap(
-        self.dbutils.entry_point.getDbutils().notebook().getContext().tags())
-
-  def _get_tag(tag_name: str, default_value: str = None) -> str:
-    values = _get_tags()[tag_name]
-    try:
-        if len(values) > 0:
-            return values
-    except KeyError:
-        return default_value
-      
   @property
   def cloud(self):
       with open("/databricks/common/conf/deploy.conf") as f:
@@ -54,7 +43,7 @@ class _DBAcademyConfig:
 
   @property
   def username(self):
-    return self._get_tags()["user"]
+    return dbacademy_get_tags()["user"]
   
   @property
   def clean_username(self):
@@ -78,7 +67,7 @@ class _DBAcademyConfig:
   
   @property
   def notebook_path(self):
-    return self.dbutils.entry_point.getDbutils().notebook().getContext().notebookPath().getOrElse(None)
+    return dbacademy_notebook_path()
   
   @property
   def notebook_name(self):
