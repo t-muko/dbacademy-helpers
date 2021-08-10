@@ -5,6 +5,7 @@ class _DBAcademyConfig:
   def __init__(self):
     from pyspark import SparkContext
     from pyspark.sql import SparkSession
+    from pyspark.dbutils import DBUtils
 
     global spark, sc
     self._use_db = False
@@ -12,6 +13,7 @@ class _DBAcademyConfig:
 
     self.spark = SparkSession.builder.getOrCreate()
     self.sc = self.spark.sparkContext
+    self.dbutils = DBUtils(self.spark)
     
   @staticmethod
   def configure(course_name, use_db):
