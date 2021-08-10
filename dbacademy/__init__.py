@@ -3,15 +3,13 @@ class _DBAcademyConfig:
   import re
   
   def __init__(self):
-    global spark
-    global sc
-    pass
+    global spark, sc
     self._use_db = False
     self._course_name = None
 
-    self.spark = spark
-    self.sc = sc
-        
+    self.spark = SparkSession.builder.getOrCreate()
+    self.sc = spark.sparkContext
+    
   @staticmethod
   def configure(course_name, use_db):
     pass
@@ -25,7 +23,7 @@ class _DBAcademyConfig:
       print(f"""The current database is now {DBAcademyConfig.user_db}""")
   
   def _get_tags(self) -> dict:
-    return sc._jvm.scala.collection.JavaConversions.mapAsJavaMap(
+    return self.sc._jvm.scala.collection.JavaConversions.mapAsJavaMap(
         dbutils.entry_point.getDbutils().notebook().getContext().tags())
 
   def _get_tag(tag_name: str, default_value: str = None) -> str:
@@ -97,11 +95,4 @@ class _DBAcademyConfig:
   def user_db(self):
     return f"dbacademy_{self.clean_username}"
   
-print(dir())
-print("-"*80)
-print(globals())
-print("-"*80)
-print(locals())
-print("-"*80)
-
 DBAcademyConfig = _DBAcademyConfig()
