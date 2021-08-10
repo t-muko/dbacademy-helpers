@@ -29,7 +29,7 @@ class _DBAcademyConfig:
   
   def _get_tags(self) -> dict:
     return self.sc._jvm.scala.collection.JavaConversions.mapAsJavaMap(
-        dbutils.entry_point.getDbutils().notebook().getContext().tags())
+        self.dbutils.entry_point.getDbutils().notebook().getContext().tags())
 
   def _get_tag(tag_name: str, default_value: str = None) -> str:
     values = _get_tags()[tag_name]
@@ -78,7 +78,7 @@ class _DBAcademyConfig:
   
   @property
   def notebook_path(self):
-    return dbutils.entry_point.getDbutils().notebook().getContext().notebookPath().getOrElse(None)
+    return self.dbutils.entry_point.getDbutils().notebook().getContext().notebookPath().getOrElse(None)
   
   @property
   def notebook_name(self):
