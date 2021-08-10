@@ -7,4 +7,6 @@
 #     version="1.0",
 #     packages=find_packages(),
 # )
+import sys
 print("Hello from setup.py")
+sys.exit(0)
