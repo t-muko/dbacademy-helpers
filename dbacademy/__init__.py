@@ -3,12 +3,15 @@ class _DBAcademyConfig:
   import re
   
   def __init__(self):
+    from pyspark import SparkContext
+    from pyspark.sql import SparkSession
+
     global spark, sc
     self._use_db = False
     self._course_name = None
 
     self.spark = SparkSession.builder.getOrCreate()
-    self.sc = spark.sparkContext
+    self.sc = self.spark.sparkContext
     
   @staticmethod
   def configure(course_name, use_db):
