@@ -1,4 +1,29 @@
 # Databricks notebook source
+from pyspark import SparkContext
+from pyspark.sql import SparkSession
+
+def init_locals():
+    # noinspection PyGlobalUndefined
+    global spark, sc, dbutils
+
+    try: spark
+    except NameError: spark = SparkSession.builder.getOrCreate()
+
+    try: sc
+    except NameError: sc = spark.sparkContext
+
+    try: dbutils
+    except NameError:
+        if spark.conf.get("spark.databricks.service.client.enabled") == "true":
+            from pyspark.dbutils import DBUtils
+            dbutils = DBUtils(spark)
+        else:
+            import IPython
+            dbutils = IPython.get_ipython().user_ns["dbutils"]
+
+    return sc, spark, dbutils
+
+sc, spark, dbutils = init_locals()
 
 def dbacademy_get_tags() -> dict:
   return sc._jvm.scala.collection.JavaConversions.mapAsJavaMap(
