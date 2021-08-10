@@ -97,4 +97,4 @@ class _DBAcademyConfig:
   def user_db(self):
     return f"dbacademy_{self.clean_username}"
   
-DBAcademyConfig = _DBAcademyConfig(spark, sc)
+DBAcademyConfig = _DBAcademyConfig()
