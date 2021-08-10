@@ -2,10 +2,13 @@
 class _DBAcademyConfig:
   import re
   
-  def __init__(self):
+  def __init__(self, spark, sc):
     pass
     self._use_db = False
     self._course_name = None
+
+    self.spark = spark
+    self.sc = sc
         
   @staticmethod
   def configure(course_name, use_db):
@@ -92,4 +95,4 @@ class _DBAcademyConfig:
   def user_db(self):
     return f"dbacademy_{self.clean_username}"
   
-DBAcademyConfig = _DBAcademyConfig()
+DBAcademyConfig = _DBAcademyConfig(spark, sc)
