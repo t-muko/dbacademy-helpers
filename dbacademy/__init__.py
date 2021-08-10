@@ -97,4 +97,11 @@ class _DBAcademyConfig:
   def user_db(self):
     return f"dbacademy_{self.clean_username}"
   
+print(dir())
+print("-"*80)
+print(globals())
+print("-"*80)
+print(locals())
+print("-"*80)
+
 DBAcademyConfig = _DBAcademyConfig()
