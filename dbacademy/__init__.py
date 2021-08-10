@@ -2,7 +2,9 @@
 class _DBAcademyConfig:
   import re
   
-  def __init__(self, spark, sc):
+  def __init__(self):
+    global spark
+    global sc
     pass
     self._use_db = False
     self._course_name = None
