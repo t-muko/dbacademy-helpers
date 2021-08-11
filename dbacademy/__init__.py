@@ -67,7 +67,7 @@ class _DBAcademyConfig:
       
   @property
   def username(self):
-    return tags["user"]
+    return self.tags["user"]
   
   @property
   def clean_username(self):
