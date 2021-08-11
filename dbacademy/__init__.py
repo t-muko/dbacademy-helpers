@@ -131,7 +131,7 @@ class _DBAcademyConfig:
     if not silent: print(f"Your working directory is\n{self.working_dir}\n")
 
     source_path = (source_path_template
-                   .replace("{course_name}", self.course_name)
+                   .replace("{course_name}", self.clean_course_name)
                    .replace("{version}", dataset_version))
     
     if not silent: print(f"The source for this dataset is\n{source_path}/\n")
