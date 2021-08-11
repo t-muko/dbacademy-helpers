@@ -138,7 +138,7 @@ class _DBAcademyConfig:
 
     # Change the final directory to another name if you like, e.g. from "datasets" to "raw"
     target_path = f"{self.working_dir}/{datasets_dir_name}"
-    existing = path_exists(target_path)
+    existing = self.path_exists(target_path)
 
     if not reinstall and existing:
       if not silent: print(f"Skipping install of existing dataset to\n{target_path}")
