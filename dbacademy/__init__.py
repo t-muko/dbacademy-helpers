@@ -120,7 +120,6 @@ class _DBAcademyConfig:
       return False
 
   def install_datasets(self, 
-                       working_dir=self.working_dir, 
                        dataset_version="v1", 
                        min_time=0, 
                        max_time=0, 
