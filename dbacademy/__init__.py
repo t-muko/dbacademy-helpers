@@ -44,7 +44,7 @@ class _DBAcademyConfig:
     
     if use_db:
       # dbacademy_use_database(DBAcademyConfig.user_db)
-      spark.sql(f"CREATE DATABASE IF NOT EXISTS {name}")
+      spark.sql(f"CREATE DATABASE IF NOT EXISTS {DBAcademyConfig.user_db}")
       spark.sql(f"USE {DBAcademyConfig.user_db}")
       print(f"""The current database is now {DBAcademyConfig.user_db}""")
   
