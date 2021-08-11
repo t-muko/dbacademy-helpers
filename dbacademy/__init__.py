@@ -36,17 +36,15 @@ class _DBAcademyConfig:
     self._course_name = None
     
   @staticmethod
-  def configure(course_name, use_db):
+  def configure(course_name, use_db=True):
     pass
     import re
     DBAcademyConfig._use_db = use_db
     DBAcademyConfig._course_name = course_name
     
     if use_db:
-      # dbacademy_use_database(DBAcademyConfig.user_db)
       spark.sql(f"CREATE DATABASE IF NOT EXISTS {DBAcademyConfig.user_db}")
       spark.sql(f"USE {DBAcademyConfig.user_db}")
-      print(f"""The current database is now {DBAcademyConfig.user_db}""")
   
   @property
   def cloud(self):
@@ -169,3 +167,5 @@ class _DBAcademyConfig:
   
   
 DBAcademyConfig = _DBAcademyConfig()
+LessonConfig = DBAcademyConfig
+LabConfig = DBAcademyConfig
