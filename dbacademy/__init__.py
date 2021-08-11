@@ -128,7 +128,7 @@ class _DBAcademyConfig:
                        datasets_dir_name="datasets",
                        source_path_template="wasbs://courseware@dbacademy.blob.core.windows.net/{course_name}/{version}"):
     
-    if not silent: print(f"Your working directory is\n{working_dir}\n")
+    if not silent: print(f"Your working directory is\n{self.working_dir}\n")
 
     source_path = (source_path_template
                    .replace("{course_name}", self.course_name)
@@ -137,7 +137,7 @@ class _DBAcademyConfig:
     if not silent: print(f"The source for this dataset is\n{source_path}/\n")
 
     # Change the final directory to another name if you like, e.g. from "datasets" to "raw"
-    target_path = f"{working_dir}/{datasets_dir_name}"
+    target_path = f"{self.working_dir}/{datasets_dir_name}"
     existing = path_exists(target_path)
 
     if not reinstall and existing:
