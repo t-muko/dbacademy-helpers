@@ -121,7 +121,7 @@ class _DBAcademyConfig:
 
   def install_datasets(self, 
                        working_dir=self.working_dir, 
-                       version="v1", 
+                       dataset_version="v1", 
                        min_time=0, 
                        max_time=0, 
                        reinstall=False, 
@@ -133,7 +133,7 @@ class _DBAcademyConfig:
 
     source_path = (source_path_template
                    .replace("{course_name}", self.course_name)
-                   .replace("{version}", version))
+                   .replace("{version}", dataset_version))
     
     if not silent: print(f"The source for this dataset is\n{source_path}/\n")
 
