@@ -135,7 +135,7 @@ class _DBAcademyConfig:
                    .replace("{version}", dataset_version))
 
     source_path_b = (source_path_template
-                   .replace("{course_name}", self.clean_course_name)
+                   .replace("{course_name}", self.clean_course_name.replace("_","-"))
                    .replace("{version}", dataset_version))
 
     if self.path_exists(source_path_a): source_path = source_path_a
