@@ -130,9 +130,17 @@ class _DBAcademyConfig:
     
     if not silent: print(f"Your working directory is\n{self.working_dir}\n")
 
-    source_path = (source_path_template
+    source_path_a = (source_path_template
                    .replace("{course_name}", self.clean_course_name)
                    .replace("{version}", dataset_version))
+
+    source_path_b = (source_path_template
+                   .replace("{course_name}", self.clean_course_name)
+                   .replace("{version}", dataset_version))
+
+    if self.path_exists(source_path_a): source_path = source_path_a
+    elif self.path_exists(source_path_b): source_path = source_path_b
+    else: raise Exception(f"The data source path does not exist: {source_path_a}")
     
     if not silent: print(f"The source for this dataset is\n{source_path}/\n")
 
