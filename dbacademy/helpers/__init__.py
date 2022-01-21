@@ -234,3 +234,4 @@ class DBAcademyHelper:
   
 DBAcademy = DBAcademyHelper()
 DA = DBAcademy
+print("moo")
