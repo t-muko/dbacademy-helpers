@@ -51,7 +51,7 @@ class DBAcademyHelper:
         spark.sql(f"CREATE DATABASE IF NOT EXISTS {DBAcademy.user_db}")
         spark.sql(f"USE {DBAcademy.user_db}")
 
-    return self
+    return DBAcademy
   
   @property
   def cloud(self):
