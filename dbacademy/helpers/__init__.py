@@ -45,7 +45,7 @@ class DBAcademyHelper:
     if use_db:
         print(f"Creating the database {DBAcademy.user_db}")
 
-        if DBAcademy.one_db == False:
+        if DBAcademy._one_db == False:
             spark.sql(f"DROP DATABASE IF EXISTS {DBAcademy.user_db} CASCADE")
 
         spark.sql(f"CREATE DATABASE IF NOT EXISTS {DBAcademy.user_db}")
@@ -101,6 +101,11 @@ class DBAcademyHelper:
     return self.notebook_path.split("/")[-1]
   
   @property
+  def clean_notebook_name(self):
+    import re
+    return re.sub("[^a-zA-Z0-9]", "_", self.notebook_name).lower() 
+  
+  @property
   def notebook_dir(self):
     return "/".join(self.notebook_path.split("/")[:-1])
 
@@ -120,7 +125,7 @@ class DBAcademyHelper:
     if self._one_db:
         return f"dbacademy_{self.clean_username}_{self.course_name}"
     else:
-        return f"dbacademy_{self.clean_username}_{self.course_name}_{self.notebook_name}"
+        return f"dbacademy_{self.clean_username}_{self.course_name}_{self.clean_notebook_name}"
   
   def path_exists(self, path):
     try:
