@@ -63,7 +63,7 @@ class DBAcademyHelper:
 
   @staticmethod
   def init_datasets(course_name, use_db=True, one_db=True, db_name=None, db_suffix=None):
-    init(course_name, use_db, one_db, db_name, db_suffix, install_datasets=True)
+    DBAcademy.init(course_name, use_db, one_db, db_name, db_suffix, install_datasets=True)
 
   @property
   def cloud(self):
