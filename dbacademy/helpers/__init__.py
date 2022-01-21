@@ -233,4 +233,4 @@ class DBAcademyHelper:
     if not silent: print(f"""\nThe install of the datasets completed successfully.""")    
   
 DBAcademy = DBAcademyHelper()
-DAH = DBAcademy
+dah = DBAcademy
