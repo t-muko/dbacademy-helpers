@@ -193,6 +193,16 @@ class DBAcademyHelper:
     except Exception:
       return False
 
+  def cleanup(self):
+    if self.path_exists(self.working_dir):
+      print(f"Removing the working directory \"{self.working_dir}\"")
+      dbutils.fs.rm(self.working_dir, True)
+    
+    if spark.sql(f"SHOW DATABASES").filter(f"databaseName == '{self.user_db}'").count() == 1:
+      print(f"Dropping the database \"{self.user_db}\"")
+      spark.sql(f"DROP DATABASE {self.user_db} CASCADE")
+
+  
   def install_datasets(self, 
                        dataset_version="v01", 
                        min_time=1, 
