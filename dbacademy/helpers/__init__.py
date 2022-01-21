@@ -77,8 +77,13 @@ class DBAcademyHelper:
 
 
   @staticmethod
-  def init_datasets(course_name, use_db=True, one_db=True, db_name=None, db_suffix=None):
-    DBAcademy.init(course_name, use_db, one_db, db_name, db_suffix, install_datasets=True)
+  def init_datasets(course_name, use_db=True, one_db=True, db_name=None, db_suffix=None, install_datasets=True):
+    DBAcademy.init(course_name=course_name, 
+                   use_db=use_db, 
+                   one_db=one_db, 
+                   db_name=db_name, 
+                   db_suffix=db_suffix, 
+                   install_datasets=install_datasets)
 
   @property
   def cloud(self):
@@ -233,4 +238,4 @@ class DBAcademyHelper:
     if not silent: print(f"""\nThe install of the datasets completed successfully.""")    
   
 DBAcademy = DBAcademyHelper()
-DA = DBAcademyHelper()
+DA = DBAcademy
