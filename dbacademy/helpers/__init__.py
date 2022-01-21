@@ -43,7 +43,7 @@ class DBAcademyHelper:
     DBAcademy._course_name = course_name
     
     if use_db:
-        print(f"Creating the database {DBAcademy.user_db}")
+        print(f"Creating the database \"{DBAcademy.user_db}\"")
 
         if DBAcademy._one_db == False:
             spark.sql(f"DROP DATABASE IF EXISTS {DBAcademy.user_db} CASCADE")
