@@ -199,8 +199,8 @@ class DBAcademyHelper:
 
     if not silent and min_time>0 and max_time>0:
       print(f"""\nNOTE: The datasets that we are installing are located in Washington, USA - depending on the
-                region that your workspace is in, this operation can take as little as {min_time} and 
-                upwards to {max_time}, but this is a one-time operation.""")
+                region that your workspace is in, this operation can take as little as {min_time} minute and 
+                upwards to {max_time} minutes, but this is a one-time operation.""")
 
     dbutils.fs.cp(source_path, target_path, True)
     if not silent: print(f"""\nThe install of the datasets completed successfully.""")    
