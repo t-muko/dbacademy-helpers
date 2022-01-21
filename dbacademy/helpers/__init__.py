@@ -234,4 +234,4 @@ class DBAcademyHelper:
   
 DBAcademy = DBAcademyHelper()
 DA = DBAcademy
-print("moo")
+DA.user_db
