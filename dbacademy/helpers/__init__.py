@@ -61,7 +61,7 @@ class DBAcademyHelper:
     if install_datasets:
       DBAcademy.install_datasets()
 
-    if DBAcademy._user_db is not None:
+    if DBAcademy._use_db == False:
       spark.conf.set("da.user_db", DBAcademy.user_db)
 
     spark.conf.set("da.working_dir", DBAcademy.working_dir)
