@@ -35,9 +35,11 @@ class DBAcademyHelper:
     self._use_db = False
     self._one_db = False
     self._course_name = None
+    self._db_name = None
+    self._db_suffix = None
     
   @staticmethod
-  def init(course_name, use_db=True, one_db=True, db_name=None, db_suffix=None):
+  def init(course_name, use_db=True, one_db=True, db_name=None, db_suffix=None, install_datasets=False):
     DBAcademy._use_db = use_db
     DBAcademy._one_db = one_db
     DBAcademy._course_name = course_name
@@ -55,7 +57,14 @@ class DBAcademyHelper:
 
         spark.sql(f"CREATE DATABASE IF NOT EXISTS {DBAcademy.user_db}")
         spark.sql(f"USE {DBAcademy.user_db}")
-  
+
+    if install_datasets:
+      DBAcademy.install_datasets()
+
+  @staticmethod
+  def init_datasets(course_name, use_db=True, one_db=True, db_name=None, db_suffix=None):
+    init(course_name, use_db, one_db, db_name, db_suffix, install_datasets=True)
+
   @property
   def cloud(self):
       with open("/databricks/common/conf/deploy.conf") as f:
