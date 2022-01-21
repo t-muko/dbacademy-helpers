@@ -164,8 +164,8 @@ class DBAcademyHelper:
 
   def install_datasets(self, 
                        dataset_version="v01", 
-                       min_time="1 minute", 
-                       max_time="5 minutes", 
+                       min_time=1, 
+                       max_time=5, 
                        reinstall=False, 
                        silent=False,
                        datasets_dir_name="datasets",
