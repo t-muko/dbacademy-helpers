@@ -143,7 +143,7 @@ class DBAcademyHelper:
                    .replace("{course_name}", self.course_name.replace(" ", "-"))
                    .replace("{version}", dataset_version))
 
-    if self.path_exists(source_path) == False
+    if self.path_exists(source_path) == False:
         raise Exception(f"The data source path does not exist: {source_path}")
     
     if not silent: print(f"The source for this dataset is\n{source_path}/\n")
