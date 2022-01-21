@@ -233,5 +233,5 @@ class DBAcademyHelper:
     if not silent: print(f"""\nThe install of the datasets completed successfully.""")    
   
 DA = DBAcademyHelper()
-DBAcademy = DA
+# DBAcademy = DA
 DA.working_dir
