@@ -198,7 +198,7 @@ class DBAcademyHelper:
       print(f"Removing the working directory \"{self.working_dir}\"")
       dbutils.fs.rm(self.working_dir, True)
     
-    if spark.sql(f"SHOW DATABASES").filter(f"databaseName == '{self.user_db}'").count() == 1:
+    if self._use_db and spark.sql(f"SHOW DATABASES").filter(f"databaseName == '{self.user_db}'").count() == 1:
       print(f"Dropping the database \"{self.user_db}\"")
       spark.sql(f"DROP DATABASE {self.user_db} CASCADE")
 
