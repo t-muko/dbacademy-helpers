@@ -232,5 +232,6 @@ class DBAcademyHelper:
     dbutils.fs.cp(source_path, target_path, True)
     if not silent: print(f"""\nThe install of the datasets completed successfully.""")    
   
-DA = DBAcademy = DBAcademyHelper()
+DA = DBAcademyHelper()
+DBAcademy = DA
 DA.working_dir
