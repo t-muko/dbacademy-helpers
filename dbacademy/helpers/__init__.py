@@ -37,7 +37,7 @@ class DBAcademyHelper:
     self._course_name = None
     
   @staticmethod
-  def init(course_name, use_db=True, one_db=False):
+  def init(course_name, use_db=True, one_db=True):
     DBAcademy._use_db = use_db
     DBAcademy._one_db = one_db
     DBAcademy._course_name = course_name
