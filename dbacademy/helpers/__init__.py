@@ -135,7 +135,8 @@ class DBAcademyHelper:
     if self._course_name is None:
       raise Exception("Please call DBAcademy.init(..) before accessing this property.")
       
-    return f"dbfs:/user/{self.username}/dbacademy/{self.course_name}"
+    course_name = self.clean_course_name.replace("_", "-")
+    return f"dbfs:/user/{self.username}/dbacademy/{course_name}"
 
   @property
   def user_db(self):
