@@ -75,8 +75,14 @@ class DBAcademyHelper:
   @property
   def clean_username(self):
     import re
-    return re.sub("[^a-zA-Z0-9]", "_", self.username)
+    name = re.sub("[^a-zA-Z0-9]", "_", self.username)
   
+    for i in range(10):
+      name = name.replace("__", "_")
+
+    return name
+
+
   @property
   def course_name(self):
     if self._course_name is None:
@@ -90,7 +96,12 @@ class DBAcademyHelper:
     if self._course_name is None:
       raise Exception("Please call DBAcademy.init(..) before accessing this property.")
       
-    return re.sub("[^a-zA-Z0-9]", "_", self._course_name).lower() 
+    name = re.sub("[^a-zA-Z0-9]", "_", self.course_name).lower() 
+
+    for i in range(10):
+      name = name.replace("__", "_")
+
+    return name
   
   @property
   def notebook_path(self):
@@ -103,8 +114,15 @@ class DBAcademyHelper:
   @property
   def clean_notebook_name(self):
     import re
-    return re.sub("[^a-zA-Z0-9]", "_", self.notebook_name).lower() 
-  
+
+    name = re.sub("[^a-zA-Z0-9]", "_", self.notebook_name).lower() 
+
+    for i in range(10):
+      name = name.replace("__", "_")
+
+    return name
+
+
   @property
   def notebook_dir(self):
     return "/".join(self.notebook_path.split("/")[:-1])
@@ -123,9 +141,9 @@ class DBAcademyHelper:
     if self._course_name == False: raise Exception("The course_name was not specified")
     
     if self._one_db:
-        return f"dbacademy_{self.clean_username}_{self.course_name}"
+        return f"dbacademy_{self.clean_username}_{self.clean_course_name}"
     else:
-        return f"dbacademy_{self.clean_username}_{self.course_name}_{self.clean_notebook_name}"
+        return f"dbacademy_{self.clean_username}_{self.clean_course_name}_{self.clean_notebook_name}"
   
   def path_exists(self, path):
     try:
