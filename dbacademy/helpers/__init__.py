@@ -169,7 +169,7 @@ class DBAcademyHelper:
                        datasets_dir_name="datasets",
                        source_path_template="wasbs://courseware@dbacademy.blob.core.windows.net/{course_name}/{version}"):
     
-    if not silent: print(f"Your working directory is\n{self.working_dir}\n")
+    if not silent: print(f"\nYour working directory is\n{self.working_dir}\n")
 
     source_path = (source_path_template
                    .replace("{course_name}", self.course_name.replace(" ", "-"))
