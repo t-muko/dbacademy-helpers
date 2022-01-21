@@ -175,7 +175,8 @@ class DBAcademyHelper:
 
     source_path = (source_path_template
                    .replace("{course_name}", self.course_name.replace(" ", "-"))
-                   .replace("{version}", dataset_version))
+                   .replace("{version}", dataset_version)
+                   .lower())
 
     if self.path_exists(source_path) == False:
         raise Exception(f"The data source path does not exist: {source_path}")
