@@ -52,8 +52,6 @@ class DBAcademyHelper:
 
         spark.sql(f"CREATE DATABASE IF NOT EXISTS {DBAcademy.user_db}")
         spark.sql(f"USE {DBAcademy.user_db}")
-
-    return DBAcademy
   
   @property
   def cloud(self):
@@ -205,7 +203,5 @@ class DBAcademyHelper:
 
     dbutils.fs.cp(source_path, target_path, True)
     if not silent: print(f"""\nThe install of the datasets completed successfully.""")    
-  
-    return self
   
 DBAcademy = DBAcademyHelper()
