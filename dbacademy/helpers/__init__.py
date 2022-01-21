@@ -61,6 +61,19 @@ class DBAcademyHelper:
     if install_datasets:
       DBAcademy.install_datasets()
 
+    spark.conf.set("da.user_db", DBAcademy.user_db)
+    spark.conf.set("da.working_dir", DBAcademy.working_dir)
+    spark.conf.set("da.cloud", DBAcademy.cloud)
+    spark.conf.set("da.username", DBAcademy.username)
+    spark.conf.set("da.clean_username", DBAcademy.clean_username)
+    spark.conf.set("da.course_name", DBAcademy.course_name)
+    spark.conf.set("da.clean_course_name", DBAcademy.clean_course_name)
+    spark.conf.set("da.notebook_path", DBAcademy.notebook_path)
+    spark.conf.set("da.notebook_name", DBAcademy.notebook_name)
+    spark.conf.set("da.clean_notebook_name", DBAcademy.clean_notebook_name)
+    spark.conf.set("da.notebook_dir", DBAcademy.notebook_dir)
+
+
   @staticmethod
   def init_datasets(course_name, use_db=True, one_db=True, db_name=None, db_suffix=None):
     DBAcademy.init(course_name, use_db, one_db, db_name, db_suffix, install_datasets=True)
