@@ -37,10 +37,12 @@ class DBAcademyHelper:
     self._course_name = None
     
   @staticmethod
-  def init(course_name, use_db=True, one_db=True):
+  def init(course_name, use_db=True, one_db=True, db_name=None, db_suffix=None):
     DBAcademy._use_db = use_db
     DBAcademy._one_db = one_db
     DBAcademy._course_name = course_name
+    DBAcademy._db_name = db_name
+    DBAcademy._db_suffix = db_suffix
     
     if use_db:
         print(f"Creating the database \"{DBAcademy.user_db}\"")
@@ -141,11 +143,18 @@ class DBAcademyHelper:
   def user_db(self):
     if self._use_db == False: raise Exception("DBAcademy was not initiaized with a database")
     if self._course_name == False: raise Exception("The course_name was not specified")
-    
-    if self._one_db:
-        return f"dbacademy_{self.clean_username}_{self.clean_course_name}"
+
+    if self._db_name is None:
+      db_name = f"dbacademy_{self.clean_username}_{self.clean_course_name}"
     else:
-        return f"dbacademy_{self.clean_username}_{self.clean_course_name}_{self.clean_notebook_name}"
+      db_name = self._db_name
+
+    if self._one_db:
+        return db_name
+    elif self._db_suffix is None:
+        return f"{db_name}_{self.clean_notebook_name}"
+    else:
+        return f"{db_name}_{self._db_suffix}"
   
   def path_exists(self, path):
     try:
